@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1029448767587",
+    "project_id": "eduandroid-b6e7a",
+    "storage_bucket": "eduandroid-b6e7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029448767587:android:13b018df826537162f0056",
+        "android_client_info": {
+          "package_name": "com.tni.eduapp.edu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029448767587-44vp8lfud1286r745s0o44nnuisprqso.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD62EdJuzd_RMaQtGV1TchNPmFeSbUipuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029448767587-44vp8lfud1286r745s0o44nnuisprqso.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
