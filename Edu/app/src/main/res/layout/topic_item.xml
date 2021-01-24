@@ -21,10 +21,8 @@
             android:id="@+id/topic_name_text"
             style="@style/course_name_style" />
 
-        <TextView
-            android:id="@+id/topic_video_text"
-            style="@style/course_name_style"
-            android:gravity="center"/>
+        <include layout="@layout/youtube_item"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

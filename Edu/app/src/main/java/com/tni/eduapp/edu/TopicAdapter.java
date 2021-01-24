@@ -7,7 +7,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.LinkedList;
 
@@ -19,15 +24,35 @@ class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.WordViewHolder> {
     class WordViewHolder extends RecyclerView.ViewHolder {
         public final TextView topic_id_view;
         public final TextView topic_name_view;
-        public final TextView topic_video_view;
         final TopicAdapter mAdapter;
+        private YouTubePlayerView youTubePlayerView;
+        private YouTubePlayer youTubePlayer;
+        private String currentVideoId;
+
 
         public WordViewHolder(View itemView, TopicAdapter adapter) {
             super(itemView);
             topic_id_view = itemView.findViewById(R.id.topic_id_text);
             topic_name_view = itemView.findViewById(R.id.topic_name_text);
-            topic_video_view = itemView.findViewById(R.id.topic_video_text);
+            youTubePlayerView = itemView.findViewById(R.id.youtube_player_view);
             mAdapter = adapter;
+
+            youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                @Override
+                public void onReady(@NonNull YouTubePlayer initializedYouTubePlayer) {
+                    youTubePlayer = initializedYouTubePlayer;
+                    youTubePlayer.cueVideo(currentVideoId, 0);
+                }
+            });
+        }
+
+        void cueVideo(String videoId) {
+            currentVideoId = videoId;
+
+            if(youTubePlayer == null)
+                return;
+
+            youTubePlayer.cueVideo(videoId, 0);
         }
     }
 
@@ -48,7 +73,7 @@ class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.WordViewHolder> {
         TopicData mCurrent = topicDataLinkedList.get(position);
         holder.topic_id_view.setText(mCurrent.getTopic_id());
         holder.topic_name_view.setText(mCurrent.getTopic_name());
-        holder.topic_video_view.setText(mCurrent.getTopic_video());
+        holder.cueVideo(mCurrent.getTopic_video());
     }
 
     @Override
