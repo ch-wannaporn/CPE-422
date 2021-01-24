@@ -1,6 +1,7 @@
 package com.tni.eduapp.edu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,9 @@ class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.WordViewHolder> {
 
     private final LinkedList<CourseData> courseDataLinkedList;
     private LayoutInflater mInflater;
+    private Context context;
 
-    class WordViewHolder extends RecyclerView.ViewHolder {
+    class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView course_id_view;
         public final TextView course_name_view;
         final CourseAdapter mAdapter;
@@ -27,11 +29,21 @@ class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.WordViewHolder> {
             course_id_view = itemView.findViewById(R.id.course_id_text);
             course_name_view = itemView.findViewById(R.id.course_name_text);
             mAdapter = adapter;
+
+            itemView.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            int mPosition = getLayoutPosition();
+            Intent intent = new Intent(context, TopicActivity.class);
+            intent.putExtra("POSITION", mPosition);
+            context.startActivity(intent);
+        }
     }
 
     public CourseAdapter(Context context, LinkedList<CourseData> c) {
+        this.context = context;
         mInflater = LayoutInflater.from(context);
         courseDataLinkedList = c;
     }
