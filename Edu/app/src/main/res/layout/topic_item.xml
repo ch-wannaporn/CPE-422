@@ -23,6 +23,12 @@
 
         <include layout="@layout/youtube_item"/>
 
+        <Button
+            android:id="@+id/topic_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="ToQuiz" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

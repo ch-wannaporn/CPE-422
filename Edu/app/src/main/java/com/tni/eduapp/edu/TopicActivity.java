@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +30,7 @@ public class TopicActivity extends AppCompatActivity {
     DatabaseReference myRef;
     String TAG = "firecon";
     TextView fireBase;
+    String FBref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class TopicActivity extends AppCompatActivity {
         int pos = intent.getIntExtra("POSITION", 99);
         TextView coursePos = findViewById(R.id.courseP);
         coursePos.setText(Integer.toString(pos));
-        String FBref = "Edu/course/" + Integer.toString(pos) + "/topic";
+        FBref = "Edu/course/" + Integer.toString(pos) + "/topic";
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference(FBref);
@@ -72,6 +75,19 @@ public class TopicActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+    }
+
+    public void ToQuiz(View view) {
+        Button b = (Button) view;
+        Intent intent = new Intent(TopicActivity.this, QuizActivity.class);
+        Log.d("Tag", b.getText().toString());
+
+        intent.putExtra("couseselect", FBref);
+        intent.putExtra("topicselect", b.getText().toString());
+        //extras.putString("Topicselect", );
+        //intent.putExtras(extras);
+        startActivity(intent);
+
     }
 
 

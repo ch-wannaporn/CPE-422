@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,13 +29,14 @@ class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.WordViewHolder> {
         private YouTubePlayerView youTubePlayerView;
         private YouTubePlayer youTubePlayer;
         private String currentVideoId;
-
+        private Button btn;
 
         public WordViewHolder(View itemView, TopicAdapter adapter) {
             super(itemView);
             topic_id_view = itemView.findViewById(R.id.topic_id_text);
             topic_name_view = itemView.findViewById(R.id.topic_name_text);
             youTubePlayerView = itemView.findViewById(R.id.youtube_player_view);
+            btn = itemView.findViewById(R.id.topic_quiz);
             mAdapter = adapter;
 
             youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
@@ -74,6 +76,7 @@ class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.WordViewHolder> {
         holder.topic_id_view.setText(mCurrent.getTopic_id());
         holder.topic_name_view.setText(mCurrent.getTopic_name());
         holder.cueVideo(mCurrent.getTopic_video());
+        holder.btn.setText(Integer.toString(position));
     }
 
     @Override
