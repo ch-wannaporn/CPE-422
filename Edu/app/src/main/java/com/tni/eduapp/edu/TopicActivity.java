@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -84,11 +88,15 @@ public class TopicActivity extends AppCompatActivity {
 
         intent.putExtra("couseselect", FBref);
         intent.putExtra("topicselect", b.getText().toString());
-        //extras.putString("Topicselect", );
-        //intent.putExtras(extras);
         startActivity(intent);
-
     }
 
+    public void ToLearn(View view) {
+        ImageView i = (ImageView) view;
+        Intent intent = new Intent(TopicActivity.this, LearnActivity.class);
+
+        intent.putExtra("videoID", i.getContentDescription());
+        startActivity(intent);
+    }
 
 }

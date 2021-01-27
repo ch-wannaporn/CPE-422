@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -21,45 +24,28 @@ class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.WordViewHolder> {
 
     private final LinkedList<TopicData> topicDataLinkedList;
     private LayoutInflater mInflater;
+    private Context context;
 
     class WordViewHolder extends RecyclerView.ViewHolder {
         public final TextView topic_id_view;
         public final TextView topic_name_view;
+        public final Button btn;
+        public final ImageView img;
         final TopicAdapter mAdapter;
-        private YouTubePlayerView youTubePlayerView;
-        private YouTubePlayer youTubePlayer;
-        private String currentVideoId;
-        private Button btn;
 
         public WordViewHolder(View itemView, TopicAdapter adapter) {
             super(itemView);
             topic_id_view = itemView.findViewById(R.id.topic_id_text);
             topic_name_view = itemView.findViewById(R.id.topic_name_text);
-            youTubePlayerView = itemView.findViewById(R.id.youtube_player_view);
             btn = itemView.findViewById(R.id.topic_quiz);
+            img = itemView.findViewById(R.id.imgView);
             mAdapter = adapter;
-
-            youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-                @Override
-                public void onReady(@NonNull YouTubePlayer initializedYouTubePlayer) {
-                    youTubePlayer = initializedYouTubePlayer;
-                    youTubePlayer.cueVideo(currentVideoId, 0);
-                }
-            });
-        }
-
-        void cueVideo(String videoId) {
-            currentVideoId = videoId;
-
-            if(youTubePlayer == null)
-                return;
-
-            youTubePlayer.cueVideo(videoId, 0);
         }
     }
 
-    public TopicAdapter(Context context, LinkedList<TopicData> t) {
-        mInflater = LayoutInflater.from(context);
+    public TopicAdapter(Context c, LinkedList<TopicData> t) {
+        context = c;
+        mInflater = LayoutInflater.from(c);
         topicDataLinkedList = t;
     }
 
@@ -75,8 +61,12 @@ class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.WordViewHolder> {
         TopicData mCurrent = topicDataLinkedList.get(position);
         holder.topic_id_view.setText(mCurrent.getTopic_id());
         holder.topic_name_view.setText(mCurrent.getTopic_name());
-        holder.cueVideo(mCurrent.getTopic_video());
         holder.btn.setText(Integer.toString(position));
+        holder.img.setContentDescription(mCurrent.getTopic_video());
+        Glide.with(context)
+                .load("https://i3.ytimg.com/vi/"+ mCurrent.getTopic_video() +"/hqdefault.jpg")
+                .apply(new RequestOptions().override( - 36, 200))
+                .into(holder.img);
     }
 
     @Override
