@@ -84,10 +84,10 @@ public class TopicActivity extends AppCompatActivity {
     public void ToQuiz(View view) {
         Button b = (Button) view;
         Intent intent = new Intent(TopicActivity.this, QuizActivity.class);
-        Log.d("Tag", b.getText().toString());
+        Log.d("Tag", b.getTag().toString());
 
         intent.putExtra("couseselect", FBref);
-        intent.putExtra("topicselect", b.getText().toString());
+        intent.putExtra("topicselect", b.getTag().toString());
         startActivity(intent);
     }
 

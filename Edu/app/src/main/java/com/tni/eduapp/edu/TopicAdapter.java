@@ -61,7 +61,7 @@ class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.WordViewHolder> {
         TopicData mCurrent = topicDataLinkedList.get(position);
         holder.topic_id_view.setText(mCurrent.getTopic_id());
         holder.topic_name_view.setText(mCurrent.getTopic_name());
-        holder.btn.setText(Integer.toString(position));
+        holder.btn.setTag(position);
         holder.img.setContentDescription(mCurrent.getTopic_video());
         Glide.with(context)
                 .load("https://i3.ytimg.com/vi/"+ mCurrent.getTopic_video() +"/hqdefault.jpg")
