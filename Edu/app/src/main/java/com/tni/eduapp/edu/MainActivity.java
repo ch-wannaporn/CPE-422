@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
 
+                courseDataLinkedList.clear();
+
                 for (DataSnapshot npsnapshot : dataSnapshot.getChildren()) {
                         CourseData c = npsnapshot.getValue(CourseData.class);
                         courseDataLinkedList.add(c);

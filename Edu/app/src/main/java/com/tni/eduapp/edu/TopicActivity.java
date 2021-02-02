@@ -57,6 +57,8 @@ public class TopicActivity extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
 
+                topicDataLinkedList.clear();
+
                 for (DataSnapshot npsnapshot : dataSnapshot.getChildren()) {
                     TopicData t = npsnapshot.getValue(TopicData.class);
                     topicDataLinkedList.add(t);

@@ -57,6 +57,8 @@ public class QuizActivity extends AppCompatActivity {
 
                     textV = findViewById(R.id.tView);
 
+                    quizDataLinkedList.clear();
+
                 for (DataSnapshot npsnapshot : dataSnapshot.getChildren()) {
                     QuizData q = npsnapshot.getValue(QuizData.class);
                     ArrayList<String> choiceDataArrayList = new ArrayList<>();
